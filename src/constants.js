@@ -8,3 +8,8 @@ export const SCOOTER_MODEL_FILTERS = {
   GOGORO_V1: SCOOTER_MODELS.GOGORO_V1,
   GOGORO_V2: SCOOTER_MODELS.GOGORO_V2,
 };
+
+export const DISPLAY_TYPES = {
+  TABLE: 'table',
+  MAP: 'map',
+};

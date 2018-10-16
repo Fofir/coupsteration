@@ -13,3 +13,5 @@ export const DISPLAY_TYPES = {
   TABLE: 'table',
   MAP: 'map',
 };
+
+export const CONSTANT_POLLING_INTERVAL = 10000;

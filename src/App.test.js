@@ -6,6 +6,7 @@ import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
+// jest.useFakeTimers();
 
 describe('<App />', () => {
   it('renders without crashing', () => {
@@ -13,6 +14,21 @@ describe('<App />', () => {
     ReactDOM.render(<App />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
+
+  xit('sets a 10 seconds interval when the component is mounted', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<App />, div);
+    expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), 10000);
+    ReactDOM.unmountComponentAtNode(div);
+  });
+
+  xit('fetches scooters on interval', async () => {
+    const wrapper = shallow(<App />);
+    const instance = wrapper.instance();
+    jest.spyOn(instance, 'fetchScooters');
+    jest.runOnlyPendingTimers();
+    expect(instance.fetchScooters).toHaveBeenCalledTimes(1);
+  })
 
   it('shows the scooter model filter as disabled until the app finised loading', () => {
     const wrapper = shallow(<App />);

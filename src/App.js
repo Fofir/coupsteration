@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import keyBy from 'lodash/keyBy';
 import reduce from 'lodash/reduce';
-import { SCOOTER_MODELS, SCOOTER_MODEL_FILTERS, DISPLAY_TYPES } from './constants';
+import {
+  CONSTANT_POLLING_INTERVAL,
+  SCOOTER_MODELS,
+  SCOOTER_MODEL_FILTERS,
+  DISPLAY_TYPES,
+} from './constants';
 import ScootersApi from './ScootersApi';
 import ScootersTable from './ScootersTable';
 import Select from './Select';
@@ -34,10 +39,22 @@ class App extends Component {
       displayType: DISPLAY_TYPES.TABLE,
       hasScooterLoadingError: false,
     };
+
+    this.interval = null;
   }
 
   componentWillMount() {
     this.fetchScooters();
+
+    window.setInterval(() => {
+      this.fetchScooters();
+    }, CONSTANT_POLLING_INTERVAL);
+  }
+
+  componentWillUnmount() {
+    if (this.interval) {
+      window.clearInterval(this.interval);
+    }
   }
 
   fetchScooters = () => {
@@ -48,9 +65,11 @@ class App extends Component {
 
     return ScootersApi.all()
       .then(({ meta, data }) => {
+        const { scooterModelFilter } = this.state;
+        const scooters = keyBy(data.scooters, 'id');
         this.setState({
-          scooters: keyBy(data.scooters, 'id'),
-          scooterIds: data.scooters.map(scooter => scooter.id),
+          scooters,
+          scooterIds: filterScootersByModel(scooters, scooterModelFilter),
           areScootersLoaded: true,
           isInitialAppStateLoaded: true,
         });

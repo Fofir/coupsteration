@@ -1,6 +1,6 @@
 # Coupsteration
 
-## "Client side application to display a list of Coup scooters
+## Client side application to display a list of Coup scooters
 
 ### Setup
 

@@ -7,11 +7,12 @@ class Select extends Component {
   }
 
   render() {
-    const { disabled, options } = this.props;
+    const { disabled, options, value } = this.props;
     return (
       <select
         onChange={this.onChange}
         disabled={disabled}
+        value={value}
       >
         {options.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
       </select>
@@ -25,11 +26,13 @@ Select.propTypes = {
     label: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   })).isRequired,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   disabled: PropTypes.bool.isRequired,
 };
 
 Select.defaultProps = {
   options: [],
+  value: '',
   disabled: false,
 };
 

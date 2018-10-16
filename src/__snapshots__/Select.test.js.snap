@@ -4,6 +4,7 @@ exports[`<Select /> renders correctly when disabled 1`] = `
 <select
   disabled={true}
   onChange={[Function]}
+  value=""
 >
   <option
     value="type 1"
@@ -22,6 +23,7 @@ exports[`<Select /> renders correctly with options 1`] = `
 <select
   disabled={false}
   onChange={[Function]}
+  value=""
 >
   <option
     value="type 1"

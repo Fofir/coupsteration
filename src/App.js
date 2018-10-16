@@ -82,6 +82,7 @@ class App extends Component {
           <div className="row">
             <div className="col-12">
               <Select
+                onChange={this.changeScooterFilter}
                 disabled={!isInitialAppStateLoaded}
                 options={scooterModelOptions}
               />

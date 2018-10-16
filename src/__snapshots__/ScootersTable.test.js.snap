@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ScootersTable /> renders correctly 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th>
+        ID
+      </th>
+      <th>
+        Scooter
+      </th>
+      <th>
+        Model
+      </th>
+      <th>
+        Battery
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        d9ef5bf9-ee2a-4c13-a5b1-5d78022c906c
+      </td>
+      <td>
+        840ERE
+      </td>
+      <td>
+        Gogoro 1st edition
+      </td>
+      <td>
+        51
+        %
+      </td>
+    </tr>
+    <tr>
+      <td>
+        be690a49-96f8-4e8f-8383-702382cfe914
+      </td>
+      <td>
+        293ERE
+      </td>
+      <td>
+        Gogoro 1st edition
+      </td>
+      <td>
+        7
+        %
+      </td>
+    </tr>
+    <tr>
+      <td>
+        23d964ab-dd9c-49cf-83aa-488a97c8e664
+      </td>
+      <td>
+        817ERE
+      </td>
+      <td>
+        Gogoro 1st edition
+      </td>
+      <td>
+        52
+        %
+      </td>
+    </tr>
+    <tr>
+      <td>
+        209e514a-7ba1-43ad-a035-0c69c3448661
+      </td>
+      <td>
+        617ERE
+      </td>
+      <td>
+        Gogoro 1st edition
+      </td>
+      <td>
+        4
+        %
+      </td>
+    </tr>
+    <tr>
+      <td>
+        e23eee67-f591-46be-a5cd-d651a70beb82
+      </td>
+      <td>
+        301ERE
+      </td>
+      <td>
+        Gogoro 1st edition
+      </td>
+      <td>
+        42
+        %
+      </td>
+    </tr>
+    <tr>
+      <td>
+        4e2f53fe-a27b-4a00-b20c-401d5a53324a
+      </td>
+      <td>
+        632ERE
+      </td>
+      <td>
+        Gogoro 1st edition
+      </td>
+      <td>
+        15
+        %
+      </td>
+    </tr>
+    <tr>
+      <td>
+        9163c7b7-ed05-498b-b804-d0a2100d8766
+      </td>
+      <td>
+        862ERE
+      </td>
+      <td>
+        Gogoro 1st edition
+      </td>
+      <td>
+        13
+        %
+      </td>
+    </tr>
+    <tr>
+      <td>
+        164d2956-80f6-4294-b1b8-b4f1886aeb3a
+      </td>
+      <td>
+        441ERE
+      </td>
+      <td>
+        Gogoro 1st edition
+      </td>
+      <td>
+        58
+        %
+      </td>
+    </tr>
+    <tr>
+      <td>
+        974bfc3b-783d-4b14-b734-dde6e72eef82
+      </td>
+      <td>
+        337ERE
+      </td>
+      <td>
+        Gogoro 1st edition
+      </td>
+      <td>
+        10
+        %
+      </td>
+    </tr>
+    <tr>
+      <td>
+        a4c88f00-e9d1-474f-890c-9ccb6528625a
+      </td>
+      <td>
+        830ERE
+      </td>
+      <td>
+        Gogoro 1st edition
+      </td>
+      <td>
+        65
+        %
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

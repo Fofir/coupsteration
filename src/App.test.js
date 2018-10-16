@@ -23,20 +23,35 @@ describe('<App />', () => {
     expect(wrapper.find('Select').props().disabled).toEqual(false);
   });
 
+  const SCOOTERS = {
+    '27a986f7-0d81-481f-a43b-5e4f7639a52a': {
+      id: '27a986f7-0d81-481f-a43b-5e4f7639a52a',
+      model: SCOOTER_MODEL_FILTERS.GOGORO_V1,
+      license_plate: "745ERA",
+      energy_level: 52,
+      location: {
+        lng: 13.3790219058295,
+        lat: 52.520945242182215
+      }
+    },
+    '27a986f7-0d81-481f-a43b-5e4f7639a52b': {
+      id: '27a986f7-0d81-481f-a43b-5e4f7639a52b',
+      model: SCOOTER_MODEL_FILTERS.GOGORO_V2,
+      license_plate: "745ERE",
+      energy_level: 52,
+      location: {
+        lng: 13.3790219058295,
+        lat: 52.520945242182215
+      }
+    },
+  }
+
   it('updates the state with a filters list of scooter ids when a filter is changed', () => {
     const wrapper = shallow(<App />);
     const instance = wrapper.instance();
-    const scooters = {
-      '27a986f7-0d81-481f-a43b-5e4f7639a52a': {
-        model: SCOOTER_MODEL_FILTERS.GOGORO_V1,
-      },
-      '27a986f7-0d81-481f-a43b-5e4f7639a52b': {
-        model: SCOOTER_MODEL_FILTERS.GOGORO_V2,
-      },
-    };
 
     wrapper.setState({
-      scooters,
+      scooters: SCOOTERS,
       scooterIds: [
         '27a986f7-0d81-481f-a43b-5e4f7639a52a',
         '27a986f7-0d81-481f-a43b-5e4f7639a52b',

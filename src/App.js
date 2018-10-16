@@ -15,10 +15,19 @@ class App extends Component {
     };
   }
 
+  changeDisplayType = (displayType) => {
+    this.setState({ displayType });
+  }
+
+  changeScooterFilter = (scooterModelFilter) => {
+    this.setState({
+      scooterModelFilter,
+    });
+  }
+
   render() {
     return (
       <div className="App">
-
       </div>
     );
   }

@@ -17,9 +17,9 @@ Row.propTypes = {
   scooter: scooterShape.isRequired,
 };
 
-const ScootersTable = ({ scooters }) => {
+const ScootersTable = ({ scooters, className }) => {
   return (
-    <table>
+    <table className={className}>
       <thead>
         <tr>
           <th>ID</th>
@@ -36,7 +36,12 @@ const ScootersTable = ({ scooters }) => {
 };
 
 ScootersTable.propTypes = {
+  className: PropTypes.string,
   scooters: PropTypes.arrayOf(scooterShape).isRequired,
+};
+
+ScootersTable.defaultProps = {
+  className: '',
 };
 
 export default ScootersTable;

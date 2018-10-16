@@ -7,9 +7,10 @@ class Select extends Component {
   }
 
   render() {
-    const { disabled, options, value } = this.props;
+    const { disabled, options, value, className } = this.props;
     return (
       <select
+        className={className}
         onChange={this.onChange}
         disabled={disabled}
         value={value}
@@ -21,6 +22,7 @@ class Select extends Component {
 };
 
 Select.propTypes = {
+  className: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,
@@ -32,6 +34,7 @@ Select.propTypes = {
 
 Select.defaultProps = {
   options: [],
+  className: '',
   value: '',
   disabled: false,
 };

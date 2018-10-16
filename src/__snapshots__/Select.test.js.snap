@@ -2,6 +2,27 @@
 
 exports[`<Select /> renders correctly when disabled 1`] = `
 <select
+  className=""
+  disabled={true}
+  onChange={[Function]}
+  value=""
+>
+  <option
+    value="type 1"
+  >
+    Type 1
+  </option>
+  <option
+    value="type 2"
+  >
+    Type 2
+  </option>
+</select>
+`;
+
+exports[`<Select /> renders correctly with a custom className 1`] = `
+<select
+  className="my-select-class"
   disabled={true}
   onChange={[Function]}
   value=""
@@ -21,6 +42,7 @@ exports[`<Select /> renders correctly when disabled 1`] = `
 
 exports[`<Select /> renders correctly with options 1`] = `
 <select
+  className=""
   disabled={false}
   onChange={[Function]}
   value=""

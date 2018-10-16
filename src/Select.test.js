@@ -39,6 +39,22 @@ describe('<Select />', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('renders correctly with a custom className', () => {
+    const options = [{
+      label: 'Type 1',
+      value: 'type 1',
+    }, {
+      label: 'Type 2',
+      value: 'type 2',
+    }];
+
+    const tree = renderer
+      .create(<Select options={options} className="my-select-class" disabled onChange={jest.fn()} />)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
   it('shold call props.onChange with the new select value upon change', () => {
     const options = [{
       label: 'Type 1',

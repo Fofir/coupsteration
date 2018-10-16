@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import keyBy from 'lodash/keyBy';
+import reduce from 'lodash/reduce';
 import { SCOOTER_MODELS, SCOOTER_MODEL_FILTERS, DISPLAY_TYPES } from './constants';
 import ScootersApi from './ScootersApi';
 import ScootersTable from './ScootersTable';
@@ -10,6 +11,15 @@ const scooterModelOptions = [
   { label: SCOOTER_MODELS.GOGORO_V1, value: SCOOTER_MODEL_FILTERS.GOGORO_V1 },
   { label: SCOOTER_MODELS.GOGORO_V2, value: SCOOTER_MODEL_FILTERS.GOGORO_V2 },
 ];
+
+export const filterScootersByModel = (scooters, model) => {
+  if (model === SCOOTER_MODEL_FILTERS.ALL) {
+    return Object.keys(scooters);
+  }
+  return reduce(scooters, (agg, scooter, id) => {
+    return scooter.model === model ? [...agg, id] : agg;
+  }, []);
+};
 
 class App extends Component {
   constructor(props) {
@@ -59,8 +69,11 @@ class App extends Component {
   }
 
   changeScooterFilter = (scooterModelFilter) => {
+    const { scooters } = this.state;
+
     this.setState({
       scooterModelFilter,
+      scooterIds: filterScootersByModel(scooters, scooterModelFilter),
     });
   }
 
@@ -69,6 +82,7 @@ class App extends Component {
       scooterIds,
       scooters,
       isInitialAppStateLoaded,
+      scooterModelFilter,
     } = this.state;
 
     return (
@@ -85,6 +99,7 @@ class App extends Component {
                 onChange={this.changeScooterFilter}
                 disabled={!isInitialAppStateLoaded}
                 options={scooterModelOptions}
+                value={scooterModelFilter}
               />
             </div>
           </div>

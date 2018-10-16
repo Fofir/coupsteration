@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import keyBy from 'lodash/keyBy';
 import reduce from 'lodash/reduce';
+import Emoji from 'react-emoji-render';
 import {
   CONSTANT_POLLING_INTERVAL,
   SCOOTER_MODELS,
@@ -102,29 +103,37 @@ class App extends Component {
       scooters,
       isInitialAppStateLoaded,
       scooterModelFilter,
+      areScootersLoaded,
     } = this.state;
 
     return (
-      <div className="App">
+      <div className="App p-3">
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h1>Coupsteration</h1>
+              <h1>Coupsteration <Emoji text="🛵" /></h1>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-3">
+              <div className="form-group">
+                <label>Model:</label>
+                <Select
+                  className="form-control"
+                  onChange={this.changeScooterFilter}
+                  disabled={!isInitialAppStateLoaded}
+                  options={scooterModelOptions}
+                  value={scooterModelFilter}
+                />
+              </div>
+            </div>
+            <div className="col-9 col-9 d-flex align-items-end  justify-content-end pb-2 text-right">
+              {!areScootersLoaded && 'loading scooters...'}
             </div>
           </div>
           <div className="row">
             <div className="col-12">
-              <Select
-                onChange={this.changeScooterFilter}
-                disabled={!isInitialAppStateLoaded}
-                options={scooterModelOptions}
-                value={scooterModelFilter}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-12">
-              <ScootersTable scooters={scooterIds.map(id => scooters[id])} />
+              <ScootersTable className="table table-striped" scooters={scooterIds.map(id => scooters[id])} />
             </div>
           </div>
         </div>

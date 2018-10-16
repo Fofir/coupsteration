@@ -7,67 +7,83 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('<App />', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<App />, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
+
+  it('shows the scooter model filter as disabled until the app finised loading', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.state('isInitialAppStateLoaded')).toEqual(false);
+    expect(wrapper.find('Select').props().disabled).toEqual(true);
+    wrapper.setState({ isInitialAppStateLoaded: true });
+    expect(wrapper.state('isInitialAppStateLoaded')).toEqual(true);
+    expect(wrapper.find('Select').props().disabled).toEqual(false);
+  });
+
+  it('updates the state with a filters list of scooter ids when a filter is changed', () => {
+    const wrapper = shallow(<App />);
+    const instance = wrapper.instance();
+    const scooters = {
+      '27a986f7-0d81-481f-a43b-5e4f7639a52a': {
+        model: SCOOTER_MODEL_FILTERS.GOGORO_V1,
+      },
+      '27a986f7-0d81-481f-a43b-5e4f7639a52b': {
+        model: SCOOTER_MODEL_FILTERS.GOGORO_V2,
+      },
+    };
+
+    wrapper.setState({
+      scooters,
+      scooterIds: [
+        '27a986f7-0d81-481f-a43b-5e4f7639a52a',
+        '27a986f7-0d81-481f-a43b-5e4f7639a52b',
+      ],
+    });
+
+    expect(wrapper.state('scooterIds')).toEqual([
+      '27a986f7-0d81-481f-a43b-5e4f7639a52a',
+      '27a986f7-0d81-481f-a43b-5e4f7639a52b',
+    ]);
+
+    instance.changeScooterFilter(SCOOTER_MODEL_FILTERS.GOGORO_V1);
+
+    expect(wrapper.state('scooterIds')).toEqual([
+      '27a986f7-0d81-481f-a43b-5e4f7639a52a',
+    ]);
+  });
 });
 
-it('updates the state with a filters list of scooter ids when a filter is changed', () => {
-  const wrapper = shallow(<App />);
-  const instance = wrapper.instance();
-  const scooters = {
-    '27a986f7-0d81-481f-a43b-5e4f7639a52a': {
-      model: SCOOTER_MODEL_FILTERS.GOGORO_V1,
-    },
-    '27a986f7-0d81-481f-a43b-5e4f7639a52b': {
-      model: SCOOTER_MODEL_FILTERS.GOGORO_V2,
-    },
-  };
-  wrapper.setState({
-    scooters,
-    scooterIds: [
-      '27a986f7-0d81-481f-a43b-5e4f7639a52a',
-      '27a986f7-0d81-481f-a43b-5e4f7639a52b',
-    ]
-  });
-  expect(wrapper.state('scooterIds')).toEqual([
-    '27a986f7-0d81-481f-a43b-5e4f7639a52a',
-    '27a986f7-0d81-481f-a43b-5e4f7639a52b',
-  ]);
+describe('helpers', () => {
+  describe('filters scooters by scooter model filter', () => {
+    const scooters = {
+      '27a986f7-0d81-481f-a43b-5e4f7639a52a': {
+        model: SCOOTER_MODEL_FILTERS.GOGORO_V1,
+      },
+      '27a986f7-0d81-481f-a43b-5e4f7639a52b': {
+        model: SCOOTER_MODEL_FILTERS.GOGORO_V2,
+      },
+    };
 
-  instance.changeScooterFilter(SCOOTER_MODEL_FILTERS.GOGORO_V1);
-  expect(wrapper.state('scooterIds')).toEqual([
-    '27a986f7-0d81-481f-a43b-5e4f7639a52a',
-  ]);
-})
+    it('filters none of the scooters when all is selected', () => {
+      expect(filterScootersByModel(scooters, SCOOTER_MODEL_FILTERS.ALL)).toEqual([
+        '27a986f7-0d81-481f-a43b-5e4f7639a52a',
+        '27a986f7-0d81-481f-a43b-5e4f7639a52b',
+      ]);
+    });
 
-describe('filters scooters by scooter model filter', () => {
-  const scooters = {
-    '27a986f7-0d81-481f-a43b-5e4f7639a52a': {
-      model: SCOOTER_MODEL_FILTERS.GOGORO_V1,
-    },
-    '27a986f7-0d81-481f-a43b-5e4f7639a52b': {
-      model: SCOOTER_MODEL_FILTERS.GOGORO_V2,
-    },
-  };
+    it('filters GOGORO_V1 scooters', () => {
+      expect(filterScootersByModel(scooters, SCOOTER_MODEL_FILTERS.GOGORO_V1)).toEqual([
+        '27a986f7-0d81-481f-a43b-5e4f7639a52a',
+      ]);
+    });
 
-  it('filters none of the scooters when all is selected', () => {
-    expect(filterScootersByModel(scooters, SCOOTER_MODEL_FILTERS.ALL)).toEqual([
-      '27a986f7-0d81-481f-a43b-5e4f7639a52a',
-      '27a986f7-0d81-481f-a43b-5e4f7639a52b',
-    ]);
-  });
-
-  it('filters GOGORO_V1 scooters', () => {
-    expect(filterScootersByModel(scooters, SCOOTER_MODEL_FILTERS.GOGORO_V1)).toEqual([
-      '27a986f7-0d81-481f-a43b-5e4f7639a52a',
-    ]);
-  });
-
-  it('filters GOGORO_V2 scooters', () => {
-    expect(filterScootersByModel(scooters, SCOOTER_MODEL_FILTERS.GOGORO_V2)).toEqual([
-      '27a986f7-0d81-481f-a43b-5e4f7639a52b',
-    ]);
+    it('filters GOGORO_V2 scooters', () => {
+      expect(filterScootersByModel(scooters, SCOOTER_MODEL_FILTERS.GOGORO_V2)).toEqual([
+        '27a986f7-0d81-481f-a43b-5e4f7639a52b',
+      ]);
+    });
   });
 });

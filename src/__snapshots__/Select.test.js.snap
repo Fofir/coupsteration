@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Select /> renders correctly when disabled 1`] = `
+<select
+  disabled={true}
+  onChange={[Function]}
+>
+  <option
+    value="type 1"
+  >
+    Type 1
+  </option>
+  <option
+    value="type 2"
+  >
+    Type 2
+  </option>
+</select>
+`;
+
+exports[`<Select /> renders correctly with options 1`] = `
+<select
+  disabled={false}
+  onChange={[Function]}
+>
+  <option
+    value="type 1"
+  >
+    Type 1
+  </option>
+  <option
+    value="type 2"
+  >
+    Type 2
+  </option>
+</select>
+`;
